@@ -7,7 +7,7 @@ Projeto em springboot que consome a api do https://developer.marvel.com/account
 
 # String curl para teste de api.
 
-- curl \ --request GET \ http://marvel-desafio.herokuapp.com:8080/characters
+- curl \ --request GET \ http://marvel-desafio.herokuapp.com/characters
 
 # Roteiro de execução:
 
