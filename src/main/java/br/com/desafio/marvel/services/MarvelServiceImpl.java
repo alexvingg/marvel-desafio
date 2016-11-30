@@ -72,7 +72,7 @@ public class MarvelServiceImpl implements MarvelService{
             c = new Character();
             c.setIdCharacter(Long.parseLong(res.getId()));
             c.setName(res.getName());
-            c.setDescription(res.getDescription());
+            c.setDescription(res.getDescription() != null ? res.getDescription() : "");
             c.setThumbnail(res.getThumbnail().getPath() + "/portrait_fantastic." + res.getThumbnail().getExtension());
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
@@ -119,7 +119,7 @@ public class MarvelServiceImpl implements MarvelService{
             Character c = new Character();
             c.setIdCharacter(Long.parseLong(res.getId()));
             c.setName(res.getName());
-            c.setDescription(res.getDescription());
+            c.setDescription(res.getDescription() != null ? res.getDescription() : "");
             c.setThumbnail(res.getThumbnail().getPath() + "/portrait_fantastic." + res.getThumbnail().getExtension());
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
@@ -144,7 +144,7 @@ public class MarvelServiceImpl implements MarvelService{
             Character c = new Character();
             c.setIdCharacter(Long.parseLong(res.getId()));
             c.setName(res.getName());
-            c.setDescription(res.getDescription());
+            c.setDescription(res.getDescription() != null ? res.getDescription() : "");
             c.setThumbnail(res.getThumbnail().getPath() + "/portrait_fantastic." + res.getThumbnail().getExtension());
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
@@ -183,8 +183,8 @@ public class MarvelServiceImpl implements MarvelService{
             for (JsonNode json : array) {
                 Comic comic = new Comic();
                 comic.setTitle(json.get("title").toString());
-                comic.setIssueNumber(json.get("issueNumber").toString());
-                comic.setDescription(json.get("description").toString());
+                comic.setIssueNumber(json.get("issueNumber").asText());
+                comic.setDescription(json.get("description").asText());
                 String img =  json.path("thumbnail").get("path").asText() + "/portrait_medium." +
                         json.path("thumbnail").get("extension").asText();
                 comic.setThumbnail(img);
