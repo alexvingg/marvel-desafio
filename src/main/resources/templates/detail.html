@@ -1,0 +1,93 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detail</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <style>
+
+        h3{
+            text-align: center;
+        }
+
+        .titulo{
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="jumbotron">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <img th:src="${character.thumbnail}" class="img-thumbnail"/>
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="row">
+                            <h3 th:text="${character.name}"></h3>
+                        </div>
+                        <div class="row">
+                            <p th:text="${character.description}"></p>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <a th:href="@{'/character'}" class="btn btn-primary btn-lg" role="button">Voltar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h3>Fascículo</h3>
+        </div>
+    </div>
+
+    <div th:each="comic : ${comics}" class="row">
+        <div class="col-xs-12">
+            <hr/>
+            <div class="row">
+                <div class="col-xs-2">
+                    <img th:src="${comic.thumbnail}"/>
+                </div>
+                <div class="col-xs-10">
+
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <span class="titulo">Titulo:</span>
+                            <span th:text="${comic.title}"></span>
+                        </div>
+                        <div class="col-xs-6">
+                            <span class="titulo">Número da capa:</span>
+                            <span th:text="${comic.issueNumber}"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <span th:text="${comic.description}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

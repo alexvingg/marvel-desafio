@@ -1,0 +1,59 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</head>
+
+<style>
+
+    .form-signin {
+        max-width: 330px;
+        padding: 15px;
+        margin: 0 auto;
+    }
+
+</style>
+
+<body>
+
+<div class="container">
+
+    <form class="form-signin" th:action="@{/login}" method="post">
+
+        <div th:if="${param.error}">
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Erro!</strong> Invalid Access data
+            </div>
+        </div>
+
+        <h2 class="form-signin-heading">Access data</h2>
+
+        <div class="form-group">
+            <label for="username" class="sr-only">Public Key</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Public Key" required="" autofocus=""/>
+        </div>
+
+        <div class="form-group">
+            <label for="password" class="sr-only">Private Key</label>
+            <input type="text" id="password" name="password" class="form-control" placeholder="Private Key" required=""/>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Access</button>
+    </form>
+
+</div>
+
+</body>
+</html>

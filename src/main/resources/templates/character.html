@@ -1,0 +1,62 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Characters</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div class="container">
+
+    <table class="table table-bordered">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Modified</th>
+        </tr>
+        <tr th:each="charac  : ${page.getContent()} ">
+            <td><a th:href="@{'/character/{id}'(id=${charac.id})}" th:text="${charac.name}"></a></td>
+            <td th:text="${charac.description}"></td>
+            <td th:text="${charac.getDateFormated()}"></td>
+        </tr>
+    </table>
+
+    <!-- Pagination Bar -->
+    <nav th:fragment="paginationbar">
+        <ul class="pagination">
+            <li th:class="${page.firstPage}? 'disabled' : ''">
+                <span th:if="${page.firstPage}">← First</span>
+                <a th:if="${not page.firstPage}" th:href="@{${page.url}(page.page=1,page.size=${page.size})}">← First</a>
+            </li>
+            <li th:class="${page.hasPreviousPage}? '' : 'disabled'">
+                <span th:if="${not page.hasPreviousPage}">«</span>
+                <a th:if="${page.hasPreviousPage}" th:href="@{${page.url}(page.page=${page.number-1},page.size=${page.size})}" title="Go to previous page">«</a>
+            </li>
+            <li th:each="item : ${page.items}" th:class="${item.current}? 'active' : ''">
+                <span th:if="${item.current}" th:text="${item.number}">1</span>
+                <a th:if="${not item.current}" th:href="@{${page.url}(page.page=${item.number},page.size=${page.size})}"><span th:text="${item.number}">1</span></a>
+            </li>
+            <li th:class="${page.hasNextPage}? '' : 'disabled'">
+                <span th:if="${not page.hasNextPage}">»</span>
+                <a th:if="${page.hasNextPage}" th:href="@{${page.url}(page.page=${page.number+1},page.size=${page.size})}" title="Go to next page">»</a>
+            </li>
+            <li th:class="${page.lastPage}? 'disabled' : ''">
+                <span th:if="${page.lastPage}">Last →</span>
+                <a th:if="${not page.lastPage}" th:href="@{${page.url}(page.page=${page.totalPages},page.size=${page.size})}">Last →</a>
+            </li>
+        </ul>
+    </nav>
+
+</div>
+</body>
+</html>
