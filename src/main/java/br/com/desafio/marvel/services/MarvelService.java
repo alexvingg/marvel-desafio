@@ -15,6 +15,8 @@ public interface MarvelService {
 
     boolean validServiceByToken(Authorization auth);
 
+    Character getCharacterId(Long id);
+
     List<Character> getCharacterList(Integer offset);
 
     List<Comic> getComics(Long id) throws Exception;

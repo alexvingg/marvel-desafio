@@ -49,7 +49,7 @@ public class ApplicationController {
 
     @RequestMapping("/character/{id}")
     public String detail(@PathVariable("id") Long id, Model model) throws Exception {
-        Character character = characterService.findByIdCharacter(id);
+        Character character = marvelService.getCharacterId(id);
         model.addAttribute("character", character);
         int offset = 0;
         RestTemplate restTemplate = new RestTemplate();

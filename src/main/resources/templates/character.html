@@ -25,7 +25,7 @@
             <th>Modified</th>
         </tr>
         <tr th:each="charac  : ${page.getContent()} ">
-            <td><a th:href="@{'/character/{id}'(id=${charac.id})}" th:text="${charac.name}"></a></td>
+            <td><a th:href="@{'/character/{id}'(id=${charac.idCharacter})}" th:text="${charac.name}"></a></td>
             <td th:text="${charac.description}"></td>
             <td th:text="${charac.getDateFormated()}"></td>
         </tr>

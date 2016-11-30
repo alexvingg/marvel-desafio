@@ -39,6 +39,9 @@ public class MarvelServiceImpl implements MarvelService{
     private final static String URL_CHARACTERS = "http://gateway.marvel.com/v1/public/characters?" +
             "apikey=%s&ts=%s&hash=%s&limit=%s&offset=%s";
 
+    private final static String URL_CHARACTER = "http://gateway.marvel.com/v1/public/characters/%s?" +
+            "apikey=%s&ts=%s&hash=%s&limit=%s";
+
     @Override
     public boolean validServiceByToken(Authorization auth) {
         Long timeStamp = System.currentTimeMillis();
@@ -54,6 +57,32 @@ public class MarvelServiceImpl implements MarvelService{
         }
 
         return true;
+    }
+
+    @Override
+    public Character getCharacterId(Long id) {
+        Authorization auth = (Authorization) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long timeStamp = System.currentTimeMillis();
+        List<Character> characterList = new ArrayList<>();
+        RestTemplate restTemplate = new RestTemplate();
+        String url = String.format(URL_CHARACTER, id ,auth.getPublicToken(), timeStamp, this.getHashAutentication(auth, timeStamp), 20);
+        CharacterPojo pojo = restTemplate.getForObject(url, CharacterPojo.class);
+        Character c = null;
+        for (Results res:pojo.getData().getResults()) {
+            c = new Character();
+            c.setIdCharacter(Long.parseLong(res.getId()));
+            c.setName(res.getName());
+            c.setDescription(res.getDescription());
+            c.setThumbnail(res.getThumbnail().getPath() + "/portrait_fantastic." + res.getThumbnail().getExtension());
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+                c.setModified(sdf.parse(res.getModified()));
+            } catch (ParseException e) {
+                log.error("Erro na conversao", e);
+            }
+        }
+
+        return c;
     }
 
     @Override
