@@ -184,7 +184,7 @@ public class MarvelServiceImpl implements MarvelService{
                 Comic comic = new Comic();
                 comic.setTitle(json.get("title").toString());
                 comic.setIssueNumber(json.get("issueNumber").asText());
-                comic.setDescription(json.get("description").asText());
+                comic.setDescription(json.get("description").equals("null") ? "" : json.get("description").asText());
                 String img =  json.path("thumbnail").get("path").asText() + "/portrait_medium." +
                         json.path("thumbnail").get("extension").asText();
                 comic.setThumbnail(img);
